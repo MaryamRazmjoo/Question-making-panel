@@ -123,9 +123,6 @@ const routes = [
           layoutHeaderType: 'panel',
           layoutLeftDrawerVisible: true,
           layoutLeftSideBarType: 'panel'
-        },
-        meta: {
-          middlewares: [auth]
         }
       },
       {
@@ -134,7 +131,7 @@ const routes = [
         component: () => import('pages/Auth/Login.vue')
       },
       {
-        path: 'user',
+        path: '/user',
         name: 'User',
         component: () => import('layouts/UserPanelLayouts/UserPanelLayout'),
         layoutConfig: {
@@ -150,13 +147,31 @@ const routes = [
         },
         children: [
           {
+
+            path: 'profile',
+            name: 'profile',
+            component: () => import('pages/User/profile/profile'),
+            layoutConfig: {
+              layoutLeftDrawerVisible: true
+  }
+          },
+          {
+            path: 'dashboard',
+            name: 'User.Dashboard',
+            component: () => import('pages/User/Dashboard/Dashboard'),
+            meta: {
+              middlewares: [auth]
+
+            }
+          },
+          {
             path: 'my-orders',
             name: 'User.MyOrders',
             component: () => import('pages/User/MyOrders/MyOrders'),
             breadcrumbs: { title: 'سفارش های من' }
           },
           {
-            path: '/user_exam_list',
+            path: 'user_exam_list',
             name: 'User.Exam.List',
             component: () => import('pages/User/exam/List'),
             middleware: [
